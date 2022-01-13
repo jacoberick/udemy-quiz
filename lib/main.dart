@@ -48,16 +48,21 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Quiz Time'),
           backgroundColor: Colors.lightBlue[800],
         ),
-        body: Column(
-          children: [
-            // Question Field
-            Question(questions[_questionIndex]['questionText'] as String),
-            // Answers Map
-            ...(questions[_questionIndex]['answers'] as List<String>).map((a) {
-              return Answer(_answerQuestion, a);
-            }),
-          ],
-        ),
+        body: _questionIndex < questions.length
+            ? Column(
+                children: [
+                  // Question Field
+                  Question(questions[_questionIndex]['questionText'] as String),
+                  // Answers Map
+                  ...(questions[_questionIndex]['answers'] as List<String>)
+                      .map((a) {
+                    return Answer(_answerQuestion, a);
+                  }),
+                ],
+              )
+            : const Center(
+                child: Text('All done.'),
+              ),
       ),
     );
   }
