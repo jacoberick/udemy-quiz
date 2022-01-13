@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 
 import "./question.dart";
+import "./answer.dart";
 
 void main() => runApp(const MyApp());
 
@@ -16,6 +17,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
 
+  // handles the answering of a question
   void _answerQuestion() {
     setState(() {
       _questionIndex++;
@@ -35,24 +37,16 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Quiz Time'),
+          backgroundColor: Colors.lightBlue[800],
         ),
         body: Column(
           children: [
             // Question Field
             Question(questions[_questionIndex]),
             // Answers
-            ElevatedButton(
-              onPressed: _answerQuestion,
-              child: const Text('answer'),
-            ),
-            ElevatedButton(
-              onPressed: _answerQuestion,
-              child: const Text('answer'),
-            ),
-            ElevatedButton(
-              onPressed: _answerQuestion,
-              child: const Text('Answer'),
-            ),
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
           ],
         ),
       ),
