@@ -26,9 +26,18 @@ class _MyAppState extends State<MyApp> {
 
   //question list
   var questions = [
-    "What's your favorite color?",
-    "What's your favorite animal?",
-    "What's your favorite food?",
+    {
+      'questionText': "What's your favorite color?",
+      'answers': ["Blue", "Red", "Green", "Yellow"]
+    },
+    {
+      'questionText': "What's your favorite food?",
+      'answers': ["Sushi", "Pizza", "Lasagna", "Ice Cream"]
+    },
+    {
+      'questionText': "What's your favorite sport?",
+      'answers': ["Baseball", "Basketball", "Football", "Hockey"]
+    },
   ];
 
   @override
@@ -42,11 +51,11 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: [
             // Question Field
-            Question(questions[_questionIndex]),
-            // Answers
-            Answer(_answerQuestion),
-            Answer(_answerQuestion),
-            Answer(_answerQuestion),
+            Question(questions[_questionIndex]['questionText'] as String),
+            // Answers Map
+            ...(questions[_questionIndex]['answers'] as List<String>).map((a) {
+              return Answer(_answerQuestion, a);
+            }),
           ],
         ),
       ),
