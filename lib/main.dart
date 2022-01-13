@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 
 import "./question.dart";
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
