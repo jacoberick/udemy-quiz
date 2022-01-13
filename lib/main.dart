@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 
-import "./question.dart";
-import "./answer.dart";
+import "./quiz.dart";
+import "./result.dart";
 
 void main() => runApp(const MyApp());
 
@@ -16,27 +16,44 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
+  var _totalScore = 0;
 
   // handles the answering of a question
-  void _answerQuestion() {
+  void _answerQuestion(int score) {
+    _totalScore += score;
     setState(() {
       _questionIndex++;
     });
   }
 
   //question list
-  static const questions = [
+  static const _questions = [
     {
       'questionText': "What's your favorite color?",
-      'answers': ["Blue", "Red", "Green", "Yellow"]
+      'answers': [
+        {"text": "Blue", "score": 10},
+        {"text": "Red", "score": 8},
+        {"text": "Green", "score": 5},
+        {"text": "Yellow", "score": 1}
+      ]
     },
     {
       'questionText': "What's your favorite food?",
-      'answers': ["Sushi", "Pizza", "Lasagna", "Ice Cream"]
+      'answers': [
+        {"text": "Sushi", "score": 10},
+        {"text": "Ice Cream", "score": 8},
+        {"text": "Pizza", "score": 5},
+        {"text": "Lasagna", "score": 1}
+      ]
     },
     {
       'questionText': "What's your favorite sport?",
-      'answers': ["Baseball", "Basketball", "Football", "Hockey"]
+      'answers': [
+        {"text": "Baseball", "score": 10},
+        {"text": "Football", "score": 8},
+        {"text": "Hockey", "score": 5},
+        {"text": "Soccer", "score": 1}
+      ]
     },
   ];
 
@@ -48,21 +65,13 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Quiz Time'),
           backgroundColor: Colors.lightBlue[800],
         ),
-        body: _questionIndex < questions.length
-            ? Column(
-                children: [
-                  // Question Field
-                  Question(questions[_questionIndex]['questionText'] as String),
-                  // Answers Map
-                  ...(questions[_questionIndex]['answers'] as List<String>)
-                      .map((a) {
-                    return Answer(_answerQuestion, a);
-                  }),
-                ],
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions,
               )
-            : const Center(
-                child: Text('All done.'),
-              ),
+            : Result(_totalScore),
       ),
     );
   }
