@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   //question list
-  var questions = [
+  static const questions = [
     {
       'questionText': "What's your favorite color?",
       'answers': ["Blue", "Red", "Green", "Yellow"]
